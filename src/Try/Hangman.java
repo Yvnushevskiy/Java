@@ -10,17 +10,20 @@ import static Try.Space.*;
 
 public class Hangman {
     public static void main(String[] args){
-        SetDificult();
-        CreateField();
-        FirstTurn();
-        FindLetter();
-        while (IsGameContinue() && QtyMistakes-mistakes!=0){
-            Turn();
-        }
-        if(QtyMistakes-mistakes!=0){
-            System.out.println("Вы отгадали слово:  "+ randomWord);
-        }
-
+        Willweplay();
+        while(!game) {
+            SetDificult();
+            CreateField();
+            FirstTurn();
+            FindLetter();
+            while (IsGameContinue() && QtyMistakes - mistakes != 0) {
+                Turn();
+            }
+            if (QtyMistakes - mistakes != 0) {
+                System.out.println("Вы отгадали слово:  " + randomWord);
+            }entered.clear();
+            Willweplay();
+        } System.out.println("Пока-пока!");
     }
 }
 class WordWork {
@@ -34,7 +37,6 @@ class WordWork {
 
     public static char CheckInput() {
         Scanner scanner = new Scanner(System.in);
-        //System.out.print("Введите букву: "); временно не нужно, т.к. планирую перенести в game
         while (!scanner.hasNext("[а-яА-Я]")) {
             System.out.print("Это не буква! Введите букву: ");
             scanner.next();
@@ -92,6 +94,23 @@ class Space{
 }
 class Game {
     static int mistakes = 0;
+    static boolean game = false;
+    public static void Willweplay(){
+        System.out.println("Мы будем играть? (Да\\Нет)");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim().toLowerCase();
+        while (!input.equals("да") && !input.equals("нет")) {
+            System.out.print("Пожалуйста, введите 'да' или 'нет' ");
+            input = scanner.nextLine().trim().toLowerCase();
+        }
+        if (input.equals("да")) {
+            game = false;
+            mistakes=0;
+        } else if (input.equals("нет")) {
+            game = true;
+        }
+
+    }
 
     public static void Deadman(){
         String[][] matrix = {
