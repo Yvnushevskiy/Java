@@ -21,7 +21,7 @@ public class Hangman {
             }
             if (QtyMistakes - mistakes != 0) {
                 System.out.println("Вы отгадали слово:  " + randomWord);
-            }entered.clear();
+            }
             Willweplay();
         } System.out.println("Пока-пока!");
     }
@@ -30,7 +30,6 @@ class WordWork {
     static String randomWord = Library.getRandomWordFromFile("rus.txt",Difficult);
     static int LenWord = randomWord.length();
     static String letter = null;
-    static ArrayList<String> entered = new ArrayList<>();
 
 
 
@@ -106,6 +105,7 @@ class Game {
         if (input.equals("да")) {
             game = false;
             mistakes=0;
+            entered.clear();
         } else if (input.equals("нет")) {
             game = true;
         }
@@ -195,6 +195,7 @@ class Game {
     }
 }
 class Settings{
+    static ArrayList<String> entered = new ArrayList<>();
     static int QtyMistakes= 6;
     static int Difficult = 0;
 }
